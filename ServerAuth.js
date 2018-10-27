@@ -10,4 +10,20 @@ function signToken(user) {
     return jwt.sign(userData, JWT_SECRET);
 };
 
+function verifyToken(req, res, next) {
+    
+    const token = req.get('token') || req.body.token || req.query.token;
+    if (!token) return res.json({ success: false, message: "No Token Provided." });
+    jwt.verify(token, JWT_SECRET, (err, decodedData) => {
+        if (err) res.json({ success: false, message: "Invalid Token" });
+        User.findById(decodedData._id, (err, user) => {
+            if (err) res.json({ success: false, message: "Invalid Token" });
+            req.user = user; 
+            next(); 
+        })
+    })
+};
+
+module.exports = { signToken, verifyToken };
+
 module.exports = { signToken };

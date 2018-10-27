@@ -12,7 +12,8 @@ exports.create = (req, res) => {
     let { body } = req;
     user.create(body, (err, user) => {
         if (err) res.json({ success: false, err});
-        res.json({ success: true, user});
+        const token = signToken(user);
+        res.json({ success: true, token});
     })
 }
 
@@ -24,17 +25,31 @@ exports.show = (req, res) => {
 }
 
 exports.update = (req, res) => {
-    let { body, params } = req;
-    User.findByIdAndUpdate(params.id, body, {new: true}, (err, updateUser) => {
-        if (err) res.json({ success: false, err});
-        res.json({ success: true, updateUser})
+    User.findById(req.params.id,(err, user) => {
+        if(!req.body.password) delete req.body.password
+        Object.assign(user, req.body)
+        user.save((err, updatedUser) =>{
+            if (err) res.json({ success: false, err});
+            res.json({ success: true, updateUser})
+        })
     })
-}
+},
 
 exports.delete = (req, res) => {
     let { id } = req.params;
     User.findOneAndDelete (id, (err, deletedUser) =>{
         if (err) res.json({ success: false, err});
         res.json({ success: true, deletedUser})
+    })
+}
+
+exports.authenticate = (req, res) => {
+    let { email, password } = req.body;
+    User.findOne({ email }, (err, user) => {
+        if (!user || !user.validPassword(password)) {
+            return res.json({ success: false, message: "Invalid Credentials" });
+        }
+        const token = signToken(user);
+        res.json({ success: true, token });
     })
 }
