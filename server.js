@@ -5,14 +5,16 @@ const
     app = express(),
     logger = require('morgan'),
     mongoose = require('mongoose'),
+    GroupRouter = require('./routes/GroupRouter'),
     { PORT, MONGODB_URI } = process.env;
 
     mongoose.connect(MONGODB_URI, err => {
         console.log(err || "Connected to MongoDB.")
     })
 
-app.use(logger('dev'))
-app.use(express.json())
+app.use(logger('dev'));
+app.use(express.json());
+app.use('/api/groups', GroupRouter);
 
 
 

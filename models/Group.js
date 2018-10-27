@@ -1,15 +1,16 @@
 const 
-    mongoose = require('mongoose'),
+    mongoose = require('mongoose');
 
-    GroupSchema = mongoose.Schema({
+    const GroupSchema = new mongoose.Schema({
         name: String,
         description: String, 
         location: String,
         date: String, 
         time: String, 
-        picture: String
+        picture: String,
+        creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}
     });
 
-    const Group = mongoose.model('Group', GroupSchema);
+    const Group = mongoose.model("Group", GroupSchema);
 
     module.exports = Group;
