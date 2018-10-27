@@ -1,0 +1,28 @@
+{
+  "name": "project-4-runapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkbailey391/Let-s-Run.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mkbailey391/Let-s-Run/issues"
+  },
+  "homepage": "https://github.com/mkbailey391/Let-s-Run#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.3.7",
+    "morgan": "^1.9.1"
+  }
+}
