@@ -4,5 +4,8 @@ const express = require('express');
 
 router.get('/', Group.index);
 router.post('/', Group.create);
+router.get('/:id', Group.show);
+router.patch('/:id', Group.update);
+router.delete('/:id', Group.delete);
 
 module.exports = router;
