@@ -4,6 +4,7 @@ import Home from './components/Home/Home';
 import Layout from './components/common/Layout/Layout';
 import Login from './components/Login/Login';
 import Logout from './components/Logout/Logout';
+import Signup from './components/Signup/Signup';
 import httpClient from './utilities/httpClient';
 
 
@@ -29,6 +30,9 @@ class App extends Component {
           }}/>
           <Route path="/logout" render={() => {
             return <Logout onLogout={onLogout}/>
+          }}/>
+          <Route path="/signup" render={(props) => {
+            return <Signup {...props} onSignupSuccess={onAuthSuccess}/>
           }}/>
         </Switch>
       </Layout>

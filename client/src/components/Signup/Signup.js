@@ -58,7 +58,7 @@ class Signup extends Component {
                                 onChange={handleChange}
                                 value={password}
                             />
-                            <input type="submit"/>
+                            <button type="submit">submit</button>
                         </form>
                     </div>
                 </div>
