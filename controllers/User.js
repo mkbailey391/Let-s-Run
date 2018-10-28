@@ -10,7 +10,7 @@ exports.index = (req, res) => {
 
 exports.create = (req, res) => {
     let { body } = req;
-    user.create(body, (err, user) => {
+    User.create(body, (err, user) => {
         if (err) res.json({ success: false, err});
         const token = signToken(user);
         res.json({ success: true, token});

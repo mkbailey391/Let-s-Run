@@ -13,10 +13,12 @@ const
         console.log(err || "Connected to MongoDB.")
     })
 
+//Middleware
 app.use(logger('dev'));
 app.use(express.json());
 app.use('/api/groups', GroupRouter);
 app.use('/api/users', UserRouter);
+app.use(express.urlencoded({extended: true})); 
 
 
 
