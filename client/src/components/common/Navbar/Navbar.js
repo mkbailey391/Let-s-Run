@@ -6,10 +6,24 @@ export default ({ currentUser }) => {
     return (
         <nav className="nav clearfix">
             <div className="float-left">
-                <span className="nav-link"></span>
                 <Link className="nav-link" to="/">Home</Link>
             </div>
-            
+            <div className="float-right">
+                {currentUser
+                    ? (
+                        <span>
+                            <span className="nav-link">Welcome {currentUser.name}</span>
+                            <Link className="nav-link" to="/logout">Logout</Link>
+                        </span>        
+                    )
+                    : (
+                        <span>
+                            <Link className="nav-link" to="/login">Login</Link>
+                            <Link className="nav-link" to="/signup">Signup</Link>           
+                        </span>
+                    )
+                }
+            </div>
         </nav>
     )
 };
