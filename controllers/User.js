@@ -45,11 +45,11 @@ exports.delete = (req, res) => {
 
 exports.authenticate = (req, res) => {
     let { email, password } = req.body;
-    User.findOne({ email }, (err, user) => {
-        if (!user || !user.validPassword(password)) {
-            return res.json({ success: false, message: "Invalid Credentials" });
+    User.findOne({email}, (err, user) => {
+        if (!user || !user.validPassword(password)){
+            return res.json({success: false, message: "invalid credentials"})
         }
         const token = signToken(user);
-        res.json({ success: true, token });
+        res.json({success: true, token});
     })
-}
+ }
