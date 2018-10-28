@@ -23,7 +23,7 @@ httpClient.getCurrentUser = function() {
 };
 
 httpClient.authenticate = async function(credentials, url) {
-    // 'this' referes to the instance of axios instantiated above.
+    // 'this' referrs to the instance of axios instantiated above.
     let res = await this({ method: "post", url, data: credentials });
     // Grab the token from the data that's returned in the response.
     const token = res.data.token;
