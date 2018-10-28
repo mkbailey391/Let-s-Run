@@ -1,6 +1,6 @@
 const 
     jwt = require('jsonwebtoken'),
-    User = requrie('./models/User'),
+    User = require('../models/User'),
     { JWT_SECRET } = process.env;
 
 // Function for creating tokens
@@ -25,5 +25,3 @@ function verifyToken(req, res, next) {
 };
 
 module.exports = { signToken, verifyToken };
-
-module.exports = { signToken };
