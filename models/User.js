@@ -1,6 +1,7 @@
 const 
     mongoose = require('mongoose'),
 	bcrypt = require('bcrypt-nodejs'),
+	//groupSchema = require('../Models/Group').schema,
 	userSchema = new mongoose.Schema({
 		name: { type: String },
 		email: { type: String, required: true, unique: true },
@@ -11,7 +12,8 @@ const
         training: { type: String },
         pace: { type: String },
         goal: { type: String },
-        level: { type: String }
+        level: { type: String },
+        //groups: [groupSchema]
     })
     
 // adds a method to a user document object to create a hashed password
