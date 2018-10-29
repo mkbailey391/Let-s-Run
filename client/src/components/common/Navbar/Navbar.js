@@ -7,7 +7,7 @@ export default ({ currentUser }) => {
        <nav className="nav clearfix">
            <div className="float-left">
                <Link className="nav-link" to="/">Let's Run</Link>
-               <Link className="nav-link" to="/find">Find a Group</Link>
+               <Link className="nav-link" to="/new">Create a Group</Link>
                <Link className="nav-link" to="/profile">Profile</Link>
            </div>
            <div className="float-right">

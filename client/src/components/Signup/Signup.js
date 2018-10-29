@@ -38,7 +38,7 @@ class Signup extends Component {
                             <input
                                 type="text"
                                 name="name"
-                                placeholder="Name"
+                                placeholder="Johnny Applseed"
                                 onChange={handleChange}
                                 value={name}
                             />
@@ -46,7 +46,7 @@ class Signup extends Component {
                             <input
                                 type="text"
                                 name="email"
-                                placeholder="example@example.com"
+                                placeholder="JohnnyAppleseed@hotmail.com"
                                 onChange={handleChange}
                                 value={email}
                             />
@@ -58,7 +58,7 @@ class Signup extends Component {
                                 onChange={handleChange}
                                 value={password}
                             />
-                            <button type="submit">submit</button>
+                            <input type="submit"/>
                         </form>
                     </div>
                 </div>

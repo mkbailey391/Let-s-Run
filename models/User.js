@@ -4,7 +4,14 @@ const
 	userSchema = new mongoose.Schema({
 		name: { type: String },
 		email: { type: String, required: true, unique: true },
-		password: { type: String, required: true }
+        password: { type: String, required: true },
+        gender: { type: String },
+        age: { type: Number },
+        location: { type: String },
+        training: { type: String },
+        pace: { type: String },
+        goal: { type: String },
+        level: { type: String }
     })
     
 // adds a method to a user document object to create a hashed password

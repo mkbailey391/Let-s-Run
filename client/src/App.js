@@ -6,7 +6,7 @@ import Login from './components/Login/Login';
 import Logout from './components/Logout/Logout';
 import Signup from './components/Signup/Signup';
 import Profile from './components/Profile/Profile';
-import Find from './components/Find/Find';
+import Create from './components/Create/Create';
 import httpClient from './utilities/httpClient';
 
 
@@ -38,6 +38,9 @@ class App extends Component {
           }}/>
           <Route path="/profile" component={() => {
             return currentUser ? <Profile/> : <Redirect to="/login"/>
+          }}/>
+          <Route path="/new" component={() =>{
+            return currentUser ? <Create/> : <Redirect to="/login"/>
           }}/>
         </Switch>
       </Layout>
