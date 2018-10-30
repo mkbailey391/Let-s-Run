@@ -1,11 +1,14 @@
 const User = require('../models/User.js');
 const signToken = require('../routes/serverAuth.js').signToken;
 
+
 exports.index = (req, res) => {
-    User.find({}, (err, users) => {
-        if (err) res.json({ success: flase, err});
-        res.json({ success: true, users});
-    })
+	User.find({})
+	.populate('groups')
+	.exec(function (err, user) {
+		if (err) return handleError(err);
+		res.json({"USER":user})
+	  })
 }
 
 exports.create = (req, res) => {
