@@ -13,8 +13,23 @@ const
         pace: { type: String },
         goal: { type: String },
         level: { type: String },
-        //groups: [groupSchema]
+        // groups: [groupSchema]
     })
+
+    const groupSchema = new mongoose.Schema({
+        name: String,
+        description: String, 
+        location: String,
+        date: String, 
+        time: String, 
+        image: String,
+        members: [userSchema],
+        creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+    });
+
+
+
+    const Group = mongoose.model("Group", groupSchema);
     
 // adds a method to a user document object to create a hashed password
 userSchema.methods.generateHash = function(password) {
