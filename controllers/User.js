@@ -1,4 +1,5 @@
 const User = require('../models/User.js');
+const Group = require('../models/Group.js');
 const signToken = require('../routes/serverAuth.js').signToken;
 
 
@@ -31,7 +32,7 @@ exports.update = (req, res) => {
     User.findById(req.params.id,(err, user) => {
         if(!req.body.password) delete req.body.password
         Object.assign(user, req.body)
-        user.save((err, updatedUser) =>{
+        user.save((err, updateUser) =>{
             if (err) res.json({ success: false, err});
             res.json({ success: true, updateUser})
         })
@@ -56,3 +57,6 @@ exports.authenticate = (req, res) => {
         res.json({success: true, token});
     })
  }
+
+ //remove groups from the user's groups array 
+ // remove user from the group's members array

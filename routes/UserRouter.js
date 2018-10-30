@@ -7,8 +7,8 @@ const
 router.get('/', User.index);
 router.post('/', User.create);
 router.post('/authenticate', User.authenticate);
-router.use(verifyToken);
 
+router.use(verifyToken);
 router.get('/:id', User.show);
 router.patch('/:id', User.update);
 router.delete('/:id', User.delete);

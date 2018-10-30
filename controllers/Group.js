@@ -1,4 +1,6 @@
-const Group = require('../models/Group');
+const 
+    Group = require('../models/Group'),
+    User = require('../models/User');
 
 exports.index = (req, res) => {
    Group.find({}, (err, groups) => {
@@ -8,7 +10,8 @@ exports.index = (req, res) => {
 }
 
 exports.create = (req, res) => {
-   Group.create(req.body, (err, createGroup) => {
+    let group = {...req.body, ...{ creator: req.user.id }}
+   Group.create(group, (err, createGroup) => {
        if (err) res.json({success: false, err});
        res.json({ success: true, createGroup});
    })
@@ -35,4 +38,53 @@ exports.delete = (req, res) => {
         if (err) res.json({ success: false, err});
         res.json({ success: true, deleteGroup});
     })
+};
+
+exports.joinGroup = (req, res) => {
+    // User is added as a member to the group 
+    let { id } = req.params;
+    Group.findById(id, (err, group) =>{
+       group.members.push(req.user.id) 
+       console.log("group", group)
+
+       group.save(( err, group )=>{
+           if (err) res.json({ success: false, err});
+          // the group is added to the user's groups
+          User.findById(req.user.id, (err, user) => {
+              console.log("user", user)
+              user.groups.push(group.id)
+
+              user.save(( err, user ) => {
+                  if (err) res.json({ success: false, err});
+                  res.json({ success: true, user})
+
+              })
+          })
+
+       })
+    })
+     
+    // pushing the value to each of those arrays
 }
+
+exports.leaveGroup = (req, res) => {
+    let { id } = req.params; 
+    Group.findById(id, (err, group) =>{
+        group.members.remove(req.user.id)
+        console.log("group", group)
+        
+        group.save(( err, group ) =>{
+            if (err) res.json({ success: false, err });
+            //the group is removed from the user's groups
+            User.findById(req.user.id, (err, user) => {
+                console.log("user", user)
+                user.groups.remove(group.id)
+
+                user.save(( err, user ) => {
+                    if (err) res.json({ success: false, user});
+                    res.json({ success: true, user})
+                })
+            }) 
+        })
+    })
+};
