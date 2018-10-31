@@ -11,7 +11,21 @@ import httpClient from './utilities/httpClient';
 
 
 class App extends Component {
-  state = { currentUser: httpClient.getCurrentUser() };
+  state = { 
+    currentUser: httpClient.getCurrentUser(), 
+    allGroups: [ {
+        "members": [],
+        "_id": "5bd9fb3cde7f6384f73ea89a",
+        "name": "Girls on the Run4",
+        "description": "Test",
+        "location": "Venice",
+        "time": "10:30AM",
+        "date": "10/31/2018",
+        "picture": "fake news",
+        "creator": "5bd9fb14de7f6384f73ea899",
+        "__v": 0
+    }] 
+};
 
   onAuthSuccess = () => {
     this.setState({ currentUser:httpClient.getCurrentUser() });
@@ -20,13 +34,25 @@ class App extends Component {
     httpClient.logOut();
     this.setState({ currentUser: null });
   }
+
+  /*
+
+  create a getGroups method
+  - uses axios to call all groups end point 
+  - res = await and put groups into state of my app
+  - create an empty array of all groups in my state
+
+  */
+  
   render() {
     let { currentUser } = this.state;
     let { onAuthSuccess, onLogout } = this;
     return (
       <Layout currentUser={currentUser}>
         <Switch>
-          <Route exact path="/" component={Home}/>
+          <Route exact path="/" 
+                render={props => <Home {...props} groups={this.state.allGroups}/>
+          }/>
           <Route path="/Login" render={(props) =>{
             return <Login {...props} onLoginSuccess={onAuthSuccess}/>
           }}/>
