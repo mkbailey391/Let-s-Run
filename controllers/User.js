@@ -23,9 +23,13 @@ exports.create = (req, res) => {
 
 exports.show = (req, res) => {
     let { id } = req.params;
-    User.findById(id, (err, showUser))
-    if (err) res.json({ success: false, err});
-    res.json({ success: true, user})
+    User.findById(id, (err, showUser) =>{
+        populate('groups', 'name')
+        .exec(function (err, showUser) {
+            if (err) res.json({ success: false, err});
+            res.json({ success: true, showUser})
+        })
+    })
 }
 
 exports.update = (req, res) => {
@@ -58,5 +62,3 @@ exports.authenticate = (req, res) => {
     })
  }
 
- //remove groups from the user's groups array 
- // remove user from the group's members array

@@ -39,8 +39,8 @@ class App extends Component {
           <Route path="/profile" component={() => {
             return currentUser ? <Profile/> : <Redirect to="/login"/>
           }}/>
-          <Route path="/new" component={() =>{
-            return currentUser ? <Create/> : <Redirect to="/login"/>
+          <Route path="/new" component={(props) =>{
+            return currentUser ? <Create {...props}/> : <Redirect to="/login"/>
           }}/>
         </Switch>
       </Layout>

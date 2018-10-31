@@ -1,6 +1,7 @@
 const 
     Group = require('../models/Group'),
-    User = require('../models/User');
+    User = require('../models/User'),
+    mongoose = require('mongoose');
 
 exports.index = (req, res) => {
    Group.find({}, (err, groups) => {
@@ -10,8 +11,10 @@ exports.index = (req, res) => {
 }
 
 exports.create = (req, res) => {
-    let group = {...req.body, ...{ creator: req.user.id }}
-   Group.create(group, (err, createGroup) => {
+    let group = {...req.body, creator: mongoose.Types.ObjectId(req.user.id) };
+    console.log(group)
+    Group.create(group, (err, createGroup) => {
+        console.log(createGroup)
        if (err) res.json({success: false, err});
        res.json({ success: true, createGroup});
    })

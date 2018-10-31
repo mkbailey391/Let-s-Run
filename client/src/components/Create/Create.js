@@ -19,7 +19,8 @@ class CreateGroup extends Component {
     handleSubmit = async (e) => {
         e.preventDefault();
         let { name, description, location, date, time, image  } = this.state;
-        await axios.post('/api/groups', { name, description, location, date, time, image });
+        let res = await axios.post('/api/groups', { name, description, location, date, time, image });
+        debugger
         this.props.history.push('/');
     }
 
@@ -95,7 +96,7 @@ class CreateGroup extends Component {
                         <div className="control">
                             <input 
                                 className="input" 
-                                name="photo" 
+                                name="image" 
                                 type="text" 
                                 placeholder="Group Picture!" 
                                 onChange={handleChange}
