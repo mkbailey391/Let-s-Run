@@ -12,33 +12,34 @@ import Card from '../common/Card/Card';
 
 class Home extends Component {
     state = {
-        groups: [],
-        message: ""
+        groups: []
     }
-async componentDidMount() {
+    async componentDidMount() {
 
-    let response = await axios.get('/api/groups');
-    let { groups } = response.data;
-    if (groups.length > 0) {
-        this.setState({ groups });
-    } else {
-        this.setState({ message: "No groups to display"})
+        let response = await axios.get('/api/groups');
+        let { groups } = response.data;
+        if (groups.length > 0) {
+            this.setState({ groups });
+        } else {
+            this.setState({ message: "No groups to display"})
+        }
     }
-}
-renderGroups = () => {
-    return this.state.groups.map(g => {
-        return (
-            <Card group={g}/>
+    renderGroups = () => {
+        return this.state.groups.map(g => {
+            return (
+                <Card group={g}/>
+            )
+        })
+    }
+
+    render(){
+        return(
+            <div>
+                <h1>Hit the Ground Running!</h1>
+                {this.renderGroups()}
+            </div>
         )
-    })
-}
-render(){
-    return(
-        <div>
-            {this.renderGroups}
-        </div>
-    )
-}
+    }
 }
 
 export default Home;
