@@ -3,6 +3,7 @@ import axios from 'axios';
 import Header from '../common/Header/Header';
 import { Link } from 'react-router-dom';
 import Card from '../common/Card/Card';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 
 class Profile extends Component {
@@ -36,6 +37,11 @@ class Profile extends Component {
         return(
             <div>
                 <h1>Your Profile</h1> 
+                <ListGroup>
+                    <ListGroupItem>Item 1</ListGroupItem>
+                    <ListGroupItem>Item 2</ListGroupItem>
+                    <ListGroupItem>...</ListGroupItem>
+                </ListGroup>;
                     <ul>
                         <li>Users Name</li>
                         <li>Gender</li>
