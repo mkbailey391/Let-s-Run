@@ -35,7 +35,19 @@ class Profile extends Component {
     render(){
         return(
             <div>
-                <h1>Your Groups</h1>
+                <h1>Your Profile</h1> 
+                    <ul>
+                        <li>Users Name</li>
+                        <li>Gender</li>
+                        <li>Age</li>
+                        <li>Location</li>
+                        <li>Training</li>
+                        <li>Pace</li>
+                        <li>Goal</li>
+                        <li>Level</li>
+                    </ul>
+                    
+                <h3>Your Groups</h3>
                 {this.renderGroups()}
                 
             </div>
