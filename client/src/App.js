@@ -7,6 +7,7 @@ import Logout from './components/Logout/Logout';
 import Signup from './components/Signup/Signup';
 import Profile from './components/Profile/Profile';
 import Create from './components/Create/Create';
+import ShowGroup from './components/ShowGroup/ShowGroup';
 import httpClient from './utilities/httpClient';
 
 
@@ -34,15 +35,6 @@ class App extends Component {
     httpClient.logOut();
     this.setState({ currentUser: null });
   }
-
-  /*
-
-  create a getGroups method
-  - uses axios to call all groups end point 
-  - res = await and put groups into state of my app
-  - create an empty array of all groups in my state
-
-  */
   
   render() {
     let { currentUser } = this.state;
@@ -62,9 +54,10 @@ class App extends Component {
           <Route path="/signup" render={(props) => {
             return <Signup {...props} onSignupSuccess={onAuthSuccess}/>
           }}/>
-          <Route path="/profile" component={() => {
+          {/* <Route path="/profile" component={() => {
             return currentUser ? <Profile/> : <Redirect to="/login"/>
-          }}/>
+          }}/> */}
+        <Route path="/profile" render={props => currentUser ? <Profile {...props} currentUser={currentUser}/> : <Redirect to="/login"/>}/>
           <Route path="/new" component={(props) =>{
             return currentUser ? <Create {...props}/> : <Redirect to="/login"/>
           }}/>

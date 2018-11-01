@@ -1,87 +1,52 @@
-// import React, { Component } from 'react';
+// import React, {Component} from 'react';
 // import axios from 'axios';
-// import Card from './Card';
+// import Header from '../common/Header/Header';
+// import { Link } from 'react-router-dom';
+// import Card from '../common/Card/Card';
 
 
 // class ShowGroup extends Component {
-//     state = { 
+//     state = {
+//         groups: [],
 //         group: undefined,
 //         name: "",
-//         description: "", 
-//         location: "",
-//         date: "", 
-//         time: "", 
-//         picture: "",
-// 		creator: //userid?,
-// 		members: //member ids?
-        
+//         description: "",
+//         location:"",
+//         date: "",
+//         time: "",
+//         creator: undefined,
+//         members: undefined
 //     }
-
 //     async componentDidMount() {
-//         let { id } = this.props.match.params;
-//         let response = await axios.get(`/api/groups/${id}`);
-//         let { name, description, location, date, time, picture, //creator //memberid } = response.data.group
-//         this.setState({ group: response.data.group, name, description, location, date, time, picture, //creator //memberId });
-//     }
 
-//     handleChange = (e) => {
-//         let { name, value } = e.target;
-//         this.setState({ [name]: value })
+//         let response = await axios.get('/api/groups');
+//         let { ShowGroup } = response.data;
+//         if (groups.length > 0) {
+//             this.setState({ ShowGroup });
+//         } else {
+//             this.setState({ message: "You have no saved groups"})
+//         }
 //     }
-
-//     handleSubmit = async (e) => {
-//         e.preventDefault();
-//         let { name, image, player } = this.state;
-//         let response = await axios.patch(`/api/groups/${group._id}`, { name, description, location, date, time, picture, //creator, //members });
-//         this.setState({ 
-//             group: response.data.group, 
-//             name: response.data.group.name,
-//             description: response.data.group.description,
-//             location: response.data.group.location,
-//             date: response.data.group.date,
-//             time: response.data.group.time,
-//             picture: response.data.group.picture,
-//             //creator: 
-//             //member:
+//     renderShowGroup = () => {
+//         return this.state.groups.map(g => {
+//             return (
+//                 <Card group={g}/>
+//             )
 //         })
 //     }
 
-//     handleClick = () => {
-//         let editEnabled = !this.state.editEnabled
-//         this.setState({ editEnabled })
-//     }
-
-//     handleDelete = async () => {
-//         let { player } = this.state;
-//         await axios.delete(`/api/players/${player._id}`);
-//         this.props.history.push('/');
-//     }
-
-//     render() {
-//         let { player, name, image, editEnabled } = this.state;
-//         let { handleChange, handleSubmit, handleClick, handleDelete } = this;
-//         if (player === undefined) return <h2>Loading...</h2>
-//         return (
-//             <div className="columns">
-//                 <div className="column">
-//                     <Card player={player}/>    
-//                 </div>
-//                 <div className="column">
-//                     {editEnabled
-//                         ? <Form 
-//                         name={name}
-//                         image={image}
-//                         handleChange={handleChange}
-//                         handleSubmit={handleSubmit}/> 
-//                         : <div><button onClick={handleClick} className="button">Edit Form</button><button className="button" onClick={handleDelete}>Delete</button></div>
-                        
-//                     }
-//                 </div>
+//     render(){
+//         return(
+//             <div>
+//                 <h1>{g.name}</h1>
+//                 {this.renderGroups()}
 //             </div>
-//         );
+//         )
 //     }
-
 // }
 
+// export default ShowGroup;
 
-// export default ShowPlayer;
+//Individual group renders on the screen. 
+// need the individual group id 
+// 

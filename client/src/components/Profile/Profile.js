@@ -5,19 +5,19 @@ import { Link } from 'react-router-dom';
 import Card from '../common/Card/Card';
 
 
-     /*
-        1. use the map method on props.groups
-        2. for each group we are on return the card with the particular group
-     */
-
 class Profile extends Component {
+    // constructor(props){
+    //     super(props)
+    // }
     state = {
         groups: []
     }
     async componentDidMount() {
-
-        let response = await axios.get('/api/groups');
-        let { groups } = response.data;
+        let {currentUser} = this.props
+        let response = await axios.get(`/api/users/${currentUser._id}`);
+        console.log("response", response.data)
+        let { groups } = response.data.showUser;
+        console.log(groups)
         if (groups.length > 0) {
             this.setState({ groups });
         } else {
@@ -35,8 +35,9 @@ class Profile extends Component {
     render(){
         return(
             <div>
-                <h1>Hit the Ground Running!</h1>
+                <h1>Your Groups</h1>
                 {this.renderGroups()}
+                
             </div>
         )
     }
