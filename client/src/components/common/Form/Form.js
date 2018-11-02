@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 // import httpClient from '../../utilities/httpClient';
 
 class Form extends Component {
-    
     state = { 
         email: "",
         password: "",
@@ -18,7 +17,6 @@ class Form extends Component {
     }
 
     handleChange = (e) => {
-        
         let { name, value } = e.target;
         this.setState({ [name]: value });
     }
@@ -31,7 +29,7 @@ class Form extends Component {
     }
 
     render() {
-        let { email, password, name, gender, age, location, training, pace, goal, level } = this.props.state;
+        let { email, password, name, gender, age, location, training, pace, goal, level } = this.props.user;
         let { handleChange, handleSubmit } = this;
         return (
             <div>
