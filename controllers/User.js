@@ -37,8 +37,8 @@ exports.update = (req, res) => {
         Object.assign(user, req.body)
         user.save((err, updateUser) =>{
             if (err) res.json({ success: false, err});
-            res.json({ success: true, updateUser})
-        })
+            const token = signToken(updateUser);
+            res.json({ success: true, token});        })
     })
 },
 

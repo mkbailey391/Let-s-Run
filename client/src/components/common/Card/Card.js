@@ -1,38 +1,41 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import httpClient from '../../../utilities/httpClient';
+import Card from 'react-bootstrap/lib/Card';
+import Button from 'react-bootstrap/lib/Button';
 
-class Card extends Component {
+
+class Cards extends Component {
     render() {
         let { group, currentUser, handleFavorite, favorited } = this.props;
         return (
-            <div key={group._id} className="card is-light column is-one-quarter">
-                <div className="card-image">
-                    <img src={group.picture}/>
-                </div>
-                <div className="card-content">
-                    <div className="media-content" style={{ textAlign: "center" }}>
-                        <div className="columns">
-                            <p className="title is-4" style={{ textAlign: "center" }}>{group.picture}</p>
-                            <p className="title is-4" style={{ textAlign: "center" }}>{group.name}</p>
-                            <p className="title is-4" style={{ textAlign: "center" }}>{group.description}</p>
-                            <p className="title is-4" style={{ textAlign: "center" }}>{group.location}</p>
-                            <p className="title is-4" style={{ textAlign: "center" }}>{group.date}</p>
-                            <p className="title is-4" style={{ textAlign: "center" }}>{group.time}</p>
-                        </div>
+            <Card key={group._id} style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={group.picture} />
+                <Card.Body>
+                    <Card.Title>{group.name}</Card.Title>
+                    <Card.Title>{group.description}</Card.Title>
+                    <Card.Title>{group.location}</Card.Title>
+                    <Card.Title>{group.date}</Card.Title>
+                    <Card.Title>{group.time}</Card.Title>
+            
                         {currentUser && 
                             <div className="columns is-multiline">
                                 <div className="column">
                                     {favorited ? <h1>FAVORITED</h1> : <h1>NOT FAVORITED</h1>}
-                                    <a className="button is-primary" style={{ width: "25%" }} onClick={() => handleFavorite(group._id)}>Save</a>
+                                    <a className="button is-primary" style={{ width: "25%" }} onClick={() => handleFavorite(group._id)}></a>
                                 </div>
                             </div>
                         }
-                    </div>
-                </div>
-            </div>
+                      <Button variant="primary">Join</Button>
+                </Card.Body>
+        </Card>
+
         )
     }
 };
 
-export default Card;
+export default Cards;
+
+
+
+  

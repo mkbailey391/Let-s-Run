@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import Header from '../common/Header/Header';
 import { Link } from 'react-router-dom';
-import Card from '../common/Card/Card';
+import Cards from '../common/Card/Card';
 import httpClient from '../../utilities/httpClient';
 
 
@@ -46,7 +46,7 @@ class Home extends Component {
             let memberOf = g.members.indexOf(currentUser._id);
             let favorited = memberOf > 0 ? true : false;
             return (
-                <Card 
+                <Cards 
                     key={g._id} 
                     currentUser={currentUser} 
                     favorited={favorited} 

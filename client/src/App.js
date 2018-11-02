@@ -57,7 +57,7 @@ class App extends Component {
           {/* <Route path="/profile" component={() => {
             return currentUser ? <Profile/> : <Redirect to="/login"/>
           }}/> */}
-        <Route path="/profile" render={props => currentUser ? <Profile {...props} currentUser={currentUser}/> : <Redirect to="/login"/>}/>
+        <Route path="/profile" render={props => currentUser ? <Profile {...props} onUpdateSuccess={onAuthSuccess} currentUser={currentUser}/> : <Redirect to="/login"/>}/>
           <Route path="/new" component={(props) =>{
             return currentUser ? <Create {...props}/> : <Redirect to="/login"/>
           }}/>
