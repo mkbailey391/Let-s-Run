@@ -21,12 +21,11 @@ class Cards extends Component {
                         {currentUser && 
                             <div className="columns is-multiline">
                                 <div className="column">
-                                    {favorited ? <h1>FAVORITED</h1> : <h1>NOT FAVORITED</h1>}
+                                    {favorited ? <h1>Join</h1> : <h1>Leave</h1>}
                                     <a className="button is-primary" style={{ width: "25%" }} onClick={() => handleFavorite(group._id)}></a>
                                 </div>
                             </div>
                         }
-                      <Button variant="primary">Join</Button>
                 </Card.Body>
         </Card>
 

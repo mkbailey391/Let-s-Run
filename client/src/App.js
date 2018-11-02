@@ -7,7 +7,6 @@ import Logout from './components/Logout/Logout';
 import Signup from './components/Signup/Signup';
 import Profile from './components/Profile/Profile';
 import Create from './components/Create/Create';
-import ShowGroup from './components/ShowGroup/ShowGroup';
 import httpClient from './utilities/httpClient';
 
 

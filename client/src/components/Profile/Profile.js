@@ -58,15 +58,6 @@ class Profile extends Component {
         this.setState({editable})
     }
 
-    //handleChange = (e) => {
-    //   let { name, value } = e.target;
-    //   this.setState({ [name]: value})
-    // }
-
-    // handleDelete = async () => {
-    //     let { player } = this.state;
-    //     await axios.delete(`/api/user/${user._id}`);
-    // }
 
 
     render(){
@@ -86,7 +77,7 @@ class Profile extends Component {
                         <ListGroup.Item>{currentUser.name}</ListGroup.Item>
                         <ListGroup.Item>{currentUser.age}</ListGroup.Item>
                         <ListGroup.Item>{currentUser.gender}</ListGroup.Item>
-                        <ListGroup.Item>{currentUser.location} ac</ListGroup.Item>
+                        <ListGroup.Item>{currentUser.location}</ListGroup.Item>
                         <ListGroup.Item>{currentUser.training}</ListGroup.Item>
                         <ListGroup.Item>{currentUser.pace}</ListGroup.Item>
                         <ListGroup.Item>{currentUser.goal}</ListGroup.Item>
@@ -117,11 +108,3 @@ class Profile extends Component {
 
 export default Profile;
 
-
-
-//Users should be able to save groups they want to join
-//Users should be able to edit their profile
-//Users should be able to delete their profile. 
-//The group ID and the User's Id need to be matched so that the correct group displays on the correct user's profile
-
-//How do I do this with this type of authentication?

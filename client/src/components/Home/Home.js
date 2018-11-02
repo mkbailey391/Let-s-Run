@@ -6,11 +6,6 @@ import Cards from '../common/Card/Card';
 import httpClient from '../../utilities/httpClient';
 
 
-     /*
-        1. use the map method on props.groups
-        2. for each group we are on return the card with the particular group
-     */
-
 class Home extends Component {
     state = {
         groups: []
@@ -40,11 +35,16 @@ class Home extends Component {
     
 
     renderGroups = () => {
-        // let loggedIn = !!this.props.currentUser
-        let { currentUser } = this.props
+        //let loggedIn = !!this.props.currentUser
+        let { currentUser } = this.props;
+        let favorited;
         return this.state.groups.map(g => {
-            let memberOf = g.members.indexOf(currentUser._id);
-            let favorited = memberOf > 0 ? true : false;
+            if (currentUser) {
+                let memberOf = g.members.indexOf(currentUser._id);
+                favorited = memberOf > 0 ? true : false;
+            } else {
+                favorited = false;
+            }
             return (
                 <Cards 
                     key={g._id} 
