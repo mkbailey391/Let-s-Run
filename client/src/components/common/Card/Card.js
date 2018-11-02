@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import httpClient from '../../../utilities/httpClient';
 import Card from 'react-bootstrap/lib/Card';
-import Button from 'react-bootstrap/lib/Button';
+import { Button } from 'react-bootstrap';
 
 
 class Cards extends Component {
     render() {
-        let { group, currentUser, handleFavorite, favorited } = this.props;
+        let { group, currentUser, toggleJoin, favorited } = this.props;
         return (
             <Card key={group._id} style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={group.image} />
@@ -21,8 +21,10 @@ class Cards extends Component {
                         {currentUser && 
                             <div className="columns is-multiline">
                                 <div className="column">
-                                    {favorited ? <h1>Join</h1> : <h1>Leave</h1>}
-                                    <a className="button is-primary" style={{ width: "25%" }} onClick={() => handleFavorite(group._id)}></a>
+                                    {favorited 
+                                        ?  <Button onClick={() => toggleJoin(group._id, "LEAVE")}>Leave</Button>
+                                        : <Button onClick={() => toggleJoin(group._id, "JOIN")}>Join</Button>
+                                    }
                                 </div>
                             </div>
                         }

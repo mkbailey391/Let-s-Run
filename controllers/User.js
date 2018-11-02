@@ -23,13 +23,17 @@ exports.create = (req, res) => {
 
 exports.show = (req, res) => {
     let { id } = req.params;
-    User.findById(id)
-        .populate('groups')
-        .exec(function (err, showUser) {
-            if (err) res.json({ success: false, err});
-            res.json({ success: true, showUser})
-        })
-    }
+    User.findById(id, (err, user) => {
+        if (err) res.json({ success: false, err });
+        res.json({ success: true, user })
+    })
+    //     .populate('groups')
+    //     .exec(function (err, showUser) {
+    //         if (err) res.json({ success: false, err});
+    //         res.json({ success: true, showUser})
+    //     })
+    // }
+};
 
 exports.update = (req, res) => {
     User.findById(req.params.id,(err, user) => {

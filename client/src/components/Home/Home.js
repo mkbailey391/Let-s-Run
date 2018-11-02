@@ -25,13 +25,15 @@ class Home extends Component {
         await this.fetchGroups();    
     }
 
-    handleFavorite = async (id) => {
-        let res = await httpClient({ url: `/api/groups/${id}/users`, method: "post" });
-        if (res.data.success) {
-            console.log(this.fetchGroups())
-            await this.fetchGroups();
-        }   
-    }
+    toggleJoin = async (id, type) => {
+        let method = (type === "LEAVE" ? "delete": "post")
+        try {
+            await httpClient({ url: `/api/groups/${id}/users`, method });
+            this.fetchGroups();
+        } catch(err) {
+            console.log(err);
+        }
+    };
     
 
     renderGroups = () => {
@@ -39,9 +41,12 @@ class Home extends Component {
         let { currentUser } = this.props;
         let favorited;
         return this.state.groups.map(g => {
+            // debugger
             if (currentUser) {
-                let memberOf = g.members.indexOf(currentUser._id);
-                favorited = memberOf > 0 ? true : false;
+                let memberOf = g.members.indexOf(currentUser._id.toString());
+                console.log(g.name, memberOf)
+                favorited = memberOf > -1 ? true : false;
+                console.log(g.name, favorited)
             } else {
                 favorited = false;
             }
@@ -50,7 +55,8 @@ class Home extends Component {
                     key={g._id} 
                     currentUser={currentUser} 
                     favorited={favorited} 
-                    handleFavorite={this.handleFavorite}
+                    toggleJoin={this.toggleJoin}
+                    toggleLeave={this.toggleLeave}
                     group={g}/>
             )
         })
