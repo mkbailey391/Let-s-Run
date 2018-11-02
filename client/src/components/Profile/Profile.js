@@ -23,21 +23,17 @@ class Profile extends Component {
     async componentDidMount() {
         let {currentUser} = this.props
         let response = await axios.get(`/api/users/${currentUser._id}`);  //Obtains group info
-        console.log("response", response.data)
         let { showUser } = response.data;
         this.setState({ user: showUser})
-        console.log(showUser.groups)
         if (showUser.groups.length > 0) {
-            this.setState({ groupos: showUser.groups });
+            this.setState({ groups: showUser.groups });
         } else {
             this.setState({ message: "No groups to display"})
         }
     }
 
 
-
-
-    renderGroups = () => {
+     renderGroups = () => {
         return this.state.groups.map(g => {
             return (
                 <Cards group={g}/>
@@ -58,6 +54,15 @@ class Profile extends Component {
         this.setState({editable})
     }
 
+    //handleChange = (e) => {
+    //   let { name, value } = e.target;
+    //   this.setState({ [name]: value})
+    // }
+
+    handleDelete = async () => {
+        let { user } = this.state;
+        await axios.delete(`/api/user/${user._id}`);
+    }
 
 
     render(){
@@ -77,7 +82,7 @@ class Profile extends Component {
                         <ListGroup.Item>{currentUser.name}</ListGroup.Item>
                         <ListGroup.Item>{currentUser.age}</ListGroup.Item>
                         <ListGroup.Item>{currentUser.gender}</ListGroup.Item>
-                        <ListGroup.Item>{currentUser.location}</ListGroup.Item>
+                        <ListGroup.Item>{currentUser.location} ac</ListGroup.Item>
                         <ListGroup.Item>{currentUser.training}</ListGroup.Item>
                         <ListGroup.Item>{currentUser.pace}</ListGroup.Item>
                         <ListGroup.Item>{currentUser.goal}</ListGroup.Item>
@@ -95,7 +100,7 @@ class Profile extends Component {
 
                     <ButtonToolbar>
                         <Button onClick={()=> this.toggleEdit(true)}variant="primary">Edit</Button>
-                        <Button variant="primary">Delete</Button>
+                        <Button variant="primary" onSubmit={this.handleDelete}>Delete</Button>
                     </ButtonToolbar>
                 <h3>Your Groups</h3>
                 {this.renderGroups()}
@@ -107,4 +112,5 @@ class Profile extends Component {
 }
 
 export default Profile;
+
 
