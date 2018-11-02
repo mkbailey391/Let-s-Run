@@ -17,20 +17,26 @@ class Profile extends Component {
     state = {
         groups: [],
         profile: null,
-        editable:true
+        editable:false,
+        user:null
     }
     async componentDidMount() {
         let {currentUser} = this.props
         let response = await axios.get(`/api/users/${currentUser._id}`);  //Obtains group info
         console.log("response", response.data)
-        let { groups } = response.data.showUser;
-        console.log(groups)
-        if (groups.length > 0) {
-            this.setState({ groups });
+        let { showUser } = response.data;
+        this.setState({ user: showUser})
+        console.log(showUser.groups)
+        if (showUser.groups.length > 0) {
+            this.setState({ groupos: showUser.groups });
         } else {
             this.setState({ message: "No groups to display"})
         }
     }
+
+
+
+
     renderGroups = () => {
         return this.state.groups.map(g => {
             return (
@@ -45,10 +51,28 @@ class Profile extends Component {
         if (res) {
             this.props.onUpdateSuccess();
         }
+        this.toggleEdit(false)
     }
+
+    toggleEdit = (editable) =>{
+        this.setState({editable})
+    }
+
+    //handleChange = (e) => {
+    //   let { name, value } = e.target;
+    //   this.setState({ [name]: value})
+    // }
+
+    // handleDelete = async () => {
+    //     let { player } = this.state;
+    //     await axios.delete(`/api/user/${user._id}`);
+    // }
+
+
     render(){
         let { currentUser } = this.props;
-
+        let { editable, user } = this.state;
+ 
         //todo clean up with destructuring
         return(
             <div>
@@ -56,7 +80,7 @@ class Profile extends Component {
 
                 <div> 
                 {
-                    !this.state.editable && 
+                    !editable && 
                     <ul>
                     <ListGroup>
                         <ListGroup.Item>{currentUser.name}</ListGroup.Item>
@@ -72,17 +96,14 @@ class Profile extends Component {
                 }
                 </div>
                 {
-                    this.state.editable && 
+                editable && user &&
                     <div>
-                      <Form user={currentUser} onSubmit={this.handleSubmit} />
+                      <Form user={user} onSubmit={this.handleSubmit} />
                      </div>
                 }
-                {
 
-                }
-                
                     <ButtonToolbar>
-                        <Button variant="primary">Edit</Button>
+                        <Button onClick={()=> this.toggleEdit(true)}variant="primary">Edit</Button>
                         <Button variant="primary">Delete</Button>
                     </ButtonToolbar>
                 <h3>Your Groups</h3>

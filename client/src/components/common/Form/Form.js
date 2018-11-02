@@ -3,19 +3,32 @@ import React, { Component } from 'react';
 // import httpClient from '../../utilities/httpClient';
 
 class Form extends Component {
-    state = { 
-        email: "",
-        password: "",
-        name: "",
-        gender: "",
-        age: "",
-        location: "",
-        training: "",
-        pace: "",
-        goal: "",
-        level: ""
-    }
+    constructor (props) {
+        super(props)
 
+        //Could refactor so state contains user object
+        this.state = { 
+            email:"",
+            password: "",
+            name: "",
+            gender: "",
+            age: "",
+            location: "",
+            training: "",
+            pace: "",
+            goal: "",
+            level: ""
+        }
+    }
+   
+
+    componentDidMount () {
+        let { user } = this.props
+        console.log(this.props)
+        if(user){
+            this.setState(user)
+        }
+    }
     handleChange = (e) => {
         let { name, value } = e.target;
         this.setState({ [name]: value });
@@ -23,13 +36,11 @@ class Form extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
-        let { email, password, name, gender, age, location, training, pace, goal, level } = this.state;
-        this.setState({ email: "", password: "", name:"", gender: "", age: "", location: "", training:"", pace: "", goal: "", level: "" });
         this.props.onSubmit(e, this.state)
     }
 
     render() {
-        let { email, password, name, gender, age, location, training, pace, goal, level } = this.props.user;
+        let { email, password, name, gender, age, location, training, pace, goal, level } = this.state;
         let { handleChange, handleSubmit } = this;
         return (
             <div>
@@ -130,24 +141,3 @@ class Form extends Component {
 }
 
 export default Form;
-
-<Form>
-  <Form.Group controlId="formBasicEmail">
-    <Form.Label>Email address</Form.Label>
-    <Form.Control type="email" placeholder="Enter email" />
-    <Form.Text className="text-muted">
-      We'll never share your email with anyone else.
-    </Form.Text>
-  </Form.Group>
-
-  <Form.Group controlId="formBasicPassword">
-    <Form.Label>Password</Form.Label>
-    <Form.Control type="password" placeholder="Password" />
-  </Form.Group>
-  <Form.Group id="formBasicChecbox">
-    <Form.Check type="checkbox" label="Check me out" />
-  </Form.Group>
-  <Button variant="primary" type="submit">
-    Submit
-  </Button>
-</Form>

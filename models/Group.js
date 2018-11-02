@@ -7,7 +7,7 @@ const
         location: String,
         date: String, 
         time: String, 
-        picture: String,
+        image: String,
 		creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 		members: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
     });

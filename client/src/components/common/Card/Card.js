@@ -10,7 +10,7 @@ class Cards extends Component {
         let { group, currentUser, handleFavorite, favorited } = this.props;
         return (
             <Card key={group._id} style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={group.picture} />
+                <Card.Img variant="top" src={group.image} />
                 <Card.Body>
                     <Card.Title>{group.name}</Card.Title>
                     <Card.Title>{group.description}</Card.Title>
