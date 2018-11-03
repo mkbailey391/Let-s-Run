@@ -20,26 +20,32 @@ class Profile extends Component {
         editable:false,
         user:null
     }
+
     async componentDidMount() {
         let {currentUser} = this.props
         let response = await axios.get(`/api/users/${currentUser._id}`);  //Obtains group info
-        let { showUser } = response.data;
-        this.setState({ user: showUser})
-        if (showUser.groups.length > 0) {
-            this.setState({ groups: showUser.groups });
+        let { user } = response.data;
+        
+        // console.log('response data', response.data);
+        // console.log('showUser', user);
+        
+        this.setState({ user: user})
+
+        if (user.groups.length > 0) {
+            this.setState({ groups: user.groups });
         } else {
             this.setState({ message: "No groups to display"})
         }
     }
 
-
-     renderGroups = () => {
+    renderGroups = () => {
         return this.state.groups.map(g => {
             return (
                 <Cards group={g}/>
             )
         })
     }
+
     handleSubmit = async (e, user) =>{
         let {currentUser} = this.props
 
@@ -86,7 +92,6 @@ class Profile extends Component {
                         <ListGroup.Item>{currentUser.training}</ListGroup.Item>
                         <ListGroup.Item>{currentUser.pace}</ListGroup.Item>
                         <ListGroup.Item>{currentUser.goal}</ListGroup.Item>
-                        <ListGroup.Item>{currentUser.training}</ListGroup.Item>
                     </ListGroup>
                     </ul>
                 }
@@ -100,7 +105,7 @@ class Profile extends Component {
 
                     <ButtonToolbar>
                         <Button onClick={()=> this.toggleEdit(true)}variant="primary">Edit</Button>
-                        <Button variant="primary" onSubmit={this.handleDelete}>Delete</Button>
+                        <Button variant="primary" onClick={this.handleDelete}>Delete</Button>
                     </ButtonToolbar>
                 <h3>Your Groups</h3>
                 {this.renderGroups()}
