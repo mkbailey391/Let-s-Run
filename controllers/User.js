@@ -27,6 +27,7 @@ exports.show = (req, res) => {
         if (err) res.json({ success: false, err });
         res.json({ success: true, user })
     })
+    .populate('groups')
     //     .populate('groups')
     //     .exec(function (err, showUser) {
     //         if (err) res.json({ success: false, err});

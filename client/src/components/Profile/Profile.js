@@ -3,7 +3,7 @@ import axios from 'axios';
 import Header from '../common/Header/Header';
 import { Link } from 'react-router-dom';
 import Form from '../common/Form/Form';
-import Cards from 'react-bootstrap/lib/Card';
+import Card from '../common/Card/Card';
 import ListGroup from 'react-bootstrap/lib/ListGroup';
 import Button from 'react-bootstrap/lib/Button';
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
@@ -22,26 +22,30 @@ class Profile extends Component {
     }
 
     async componentDidMount() {
-        let {currentUser} = this.props
+        let { currentUser } = this.props
         let response = await axios.get(`/api/users/${currentUser._id}`);  //Obtains group info
-        let { user } = response.data;
+        console.log(response)
+        this.setState({
+            groups: response.data.user.groups
+        })
         
         // console.log('response data', response.data);
         // console.log('showUser', user);
         
-        this.setState({ user: user})
+        // this.setState({ user: user})
 
-        if (user.groups.length > 0) {
-            this.setState({ groups: user.groups });
-        } else {
-            this.setState({ message: "No groups to display"})
-        }
+        // if (currentUser.groups.length > 0) {
+        //     this.setState({ groups: user.groups });
+        // } else {
+        //     this.setState({ message: "No groups to display"})
+        // }
     }
 
     renderGroups = () => {
-        return this.state.groups.map(g => {
+        return this.state.groups && this.state.groups.map(g => {
             return (
-                <Cards group={g}/>
+                <Card group={g}/>
+                // <div>{g} </div>
             )
         })
     }
@@ -64,11 +68,14 @@ class Profile extends Component {
     //   let { name, value } = e.target;
     //   this.setState({ [name]: value})
     // }
-
-    handleDelete = async () => {
-        let { user } = this.state;
-        await axios.delete(`/api/user/${user._id}`);
+    
+    handleDelete = async (e) => {
+        let { currentUser } = this.props;
+        let res = await axios.delete(`/api/users/${currentUser._id}`);
+        if (res) {
+            this.props.history.push('/logout');
     }
+}
 
 
     render(){
@@ -88,7 +95,7 @@ class Profile extends Component {
                         <ListGroup.Item>{currentUser.name}</ListGroup.Item>
                         <ListGroup.Item>{currentUser.age}</ListGroup.Item>
                         <ListGroup.Item>{currentUser.gender}</ListGroup.Item>
-                        <ListGroup.Item>{currentUser.location} ac</ListGroup.Item>
+                        <ListGroup.Item>{currentUser.location}</ListGroup.Item>
                         <ListGroup.Item>{currentUser.training}</ListGroup.Item>
                         <ListGroup.Item>{currentUser.pace}</ListGroup.Item>
                         <ListGroup.Item>{currentUser.goal}</ListGroup.Item>
@@ -105,7 +112,7 @@ class Profile extends Component {
 
                     <ButtonToolbar>
                         <Button onClick={()=> this.toggleEdit(true)}variant="primary">Edit</Button>
-                        <Button variant="primary" onClick={this.handleDelete}>Delete</Button>
+                        <Button onClick={this.handleDelete} variant="primary" >Delete</Button>
                     </ButtonToolbar>
                 <h3>Your Groups</h3>
                 {this.renderGroups()}

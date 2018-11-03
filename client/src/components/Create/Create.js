@@ -20,7 +20,6 @@ class CreateGroup extends Component {
         e.preventDefault();
         let { name, description, location, date, time, image  } = this.state;
         let res = await axios.post('/api/groups', { name, description, location, date, time, image });
-        debugger
         this.props.history.push('/');
     }
 
