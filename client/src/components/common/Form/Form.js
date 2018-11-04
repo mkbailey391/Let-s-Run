@@ -125,7 +125,7 @@ class Form extends Component {
                             <input
                                 type="text"
                                 name="level"
-                                placeholder="Begginer?... Intermediate?... Advanced?"
+                                placeholder="Beginner?... Intermediate?... Advanced?"
                                 onChange={handleChange}
                                 value={level}
                             />

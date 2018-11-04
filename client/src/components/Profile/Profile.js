@@ -53,21 +53,25 @@ class Profile extends Component {
     handleSubmit = async (e, user) =>{
         let {currentUser} = this.props
 
-        let res = await httpClient.authenticate(user, `/api/users/${currentUser._id}`, "patch");
+        let res = await httpClient({ method: "patch", url: `/api/users/${currentUser._id}`});
         if (res) {
             this.props.onUpdateSuccess();
         }
-        this.toggleEdit(false)
+        // this.toggleEdit(false)
+    }
+    handleClick = () => {
+        let editable = !this.state.editable;
+        this.setState({ editable });
     }
 
-    toggleEdit = (editable) =>{
-        this.setState({editable})
-    }
-
-    //handleChange = (e) => {
-    //   let { name, value } = e.target;
-    //   this.setState({ [name]: value})
+    // toggleEdit = (editable) =>{
+    //     this.setState({editable})
     // }
+
+    handleChange = (e) => {
+      let { name, value } = e.target;
+      this.setState({ [name]: value})
+    }
     
     handleDelete = async (e) => {
         let { currentUser } = this.props;
@@ -81,6 +85,7 @@ class Profile extends Component {
     render(){
         let { currentUser } = this.props;
         let { editable, user } = this.state;
+        let { handleClick } = this;
  
         //todo clean up with destructuring
         return(
@@ -106,12 +111,12 @@ class Profile extends Component {
                 {
                 editable && user &&
                     <div>
-                      <Form user={user} onSubmit={this.handleSubmit} />
+                      <Form user={currentUser} onSubmit={this.handleSubmit} />
                      </div>
                 }
 
                     <ButtonToolbar>
-                        <Button onClick={()=> this.toggleEdit(true)}variant="primary">Edit</Button>
+                        <Button onClick={this.handleClick}variant="primary">Edit</Button>
                         <Button onClick={this.handleDelete} variant="primary" >Delete</Button>
                     </ButtonToolbar>
                 <h3>Your Groups</h3>
