@@ -55,9 +55,10 @@ class Profile extends Component {
     handleSubmit = async (e, user) =>{
         let {currentUser} = this.props
 
-        let res = await httpClient({ method: "patch", url: `/api/users/${currentUser._id}`});
+        let res = await httpClient.authenticate( user, `/api/users/${currentUser._id}`, "patch");
         if (res) {
             this.props.onUpdateSuccess();
+            this.toggleEdit(false)
         }
         // this.toggleEdit(false)
     }
@@ -80,7 +81,7 @@ class Profile extends Component {
 }
 
 render(){
-    // let { currentUser } = this.props;
+    let { currentUser } = this.props;
     let { editable, user } = this.state;
 
     //todo clean up with destructuring
@@ -90,16 +91,16 @@ render(){
 
             <div> 
             {
-                !editable && user &&
+                !editable && currentUser &&
                 <ul>
                 <ListGroup>
-                    <ListGroup.Item>{user.name}</ListGroup.Item>
-                    <ListGroup.Item>{user.age}</ListGroup.Item>
-                    <ListGroup.Item>{user.gender}</ListGroup.Item>
-                    <ListGroup.Item>{user.location}</ListGroup.Item>
-                    <ListGroup.Item>{user.training}</ListGroup.Item>
-                    <ListGroup.Item>{user.pace}</ListGroup.Item>
-                    <ListGroup.Item>{user.goal}</ListGroup.Item>
+                    <ListGroup.Item>{currentUser.name}</ListGroup.Item>
+                    <ListGroup.Item>{currentUser.age}</ListGroup.Item>
+                    <ListGroup.Item>{currentUser.gender}</ListGroup.Item>
+                    <ListGroup.Item>{currentUser.location}</ListGroup.Item>
+                    <ListGroup.Item>{currentUser.training}</ListGroup.Item>
+                    <ListGroup.Item>{currentUser.pace}</ListGroup.Item>
+                    <ListGroup.Item>{currentUser.goal}</ListGroup.Item>
                 </ListGroup>
                 </ul>
             }
