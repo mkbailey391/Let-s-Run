@@ -24,9 +24,11 @@ class Profile extends Component {
     async componentDidMount() {
         let { currentUser } = this.props
         let response = await axios.get(`/api/users/${currentUser._id}`);  //Obtains group info
-        console.log(response)
+				console.log(response)
+				let { user } = response.data
         this.setState({
-            groups: response.data.user.groups
+						groups: user.groups,
+						user:user
         })
         
         // console.log('response data', response.data);
@@ -59,14 +61,10 @@ class Profile extends Component {
         }
         // this.toggleEdit(false)
     }
-    handleClick = () => {
-        let editable = !this.state.editable;
-        this.setState({ editable });
-    }
 
-    // toggleEdit = (editable) =>{
-    //     this.setState({editable})
-    // }
+    toggleEdit = (editable) =>{
+        this.setState({editable})
+    }
 
     handleChange = (e) => {
       let { name, value } = e.target;
@@ -81,51 +79,49 @@ class Profile extends Component {
     }
 }
 
+render(){
+    // let { currentUser } = this.props;
+    let { editable, user } = this.state;
 
-    render(){
-        let { currentUser } = this.props;
-        let { editable, user } = this.state;
-        let { handleClick } = this;
- 
-        //todo clean up with destructuring
-        return(
-            <div>
-                <h1>Your Profile</h1> 
+    //todo clean up with destructuring
+    return(
+        <div>
+            <h1>Your Profile</h1> 
 
-                <div> 
-                {
-                    !editable && 
-                    <ul>
-                    <ListGroup>
-                        <ListGroup.Item>{currentUser.name}</ListGroup.Item>
-                        <ListGroup.Item>{currentUser.age}</ListGroup.Item>
-                        <ListGroup.Item>{currentUser.gender}</ListGroup.Item>
-                        <ListGroup.Item>{currentUser.location}</ListGroup.Item>
-                        <ListGroup.Item>{currentUser.training}</ListGroup.Item>
-                        <ListGroup.Item>{currentUser.pace}</ListGroup.Item>
-                        <ListGroup.Item>{currentUser.goal}</ListGroup.Item>
-                    </ListGroup>
-                    </ul>
-                }
-                </div>
-                {
-                editable && user &&
-                    <div>
-                      <Form user={currentUser} onSubmit={this.handleSubmit} />
-                     </div>
-                }
-
-                    <ButtonToolbar>
-                        <Button onClick={this.handleClick}variant="primary">Edit</Button>
-                        <Button onClick={this.handleDelete} variant="primary" >Delete</Button>
-                    </ButtonToolbar>
-                <h3>Your Groups</h3>
-                {this.renderGroups()}
-                
-                
+            <div> 
+            {
+                !editable && user &&
+                <ul>
+                <ListGroup>
+                    <ListGroup.Item>{user.name}</ListGroup.Item>
+                    <ListGroup.Item>{user.age}</ListGroup.Item>
+                    <ListGroup.Item>{user.gender}</ListGroup.Item>
+                    <ListGroup.Item>{user.location}</ListGroup.Item>
+                    <ListGroup.Item>{user.training}</ListGroup.Item>
+                    <ListGroup.Item>{user.pace}</ListGroup.Item>
+                    <ListGroup.Item>{user.goal}</ListGroup.Item>
+                </ListGroup>
+                </ul>
+            }
             </div>
-        )
-    }
+            {
+            editable && user &&
+                <div>
+                  <Form user={user} onSubmit={this.handleSubmit} />
+                 </div>
+            }
+
+                <ButtonToolbar>
+                    <Button onClick={()=> this.toggleEdit(true)}variant="primary">Edit</Button>
+                    <Button onClick={this.handleDelete} variant="primary" >Delete</Button>
+                </ButtonToolbar>
+            <h3>Your Groups</h3>
+            {this.renderGroups()}
+            
+            
+        </div>
+    )
+}
 }
 
 export default Profile;
