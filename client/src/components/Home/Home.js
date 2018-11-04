@@ -41,7 +41,6 @@ class Home extends Component {
         let { currentUser } = this.props;
         let favorited;
         return this.state.groups.map(g => {
-            // debugger
             if (currentUser) {
                 let memberOf = g.members.indexOf(currentUser._id.toString());
                 console.log(g.name, memberOf)

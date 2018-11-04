@@ -7,7 +7,6 @@ class Signup extends Component {
   
 
     handleSubmit = async (e, user) => {
-        alert(JSON.stringify(user))
         let res = await httpClient.authenticate(user, "/api/users", "post");
         if (res) {
             this.props.onSignupSuccess();

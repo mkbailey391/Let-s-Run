@@ -17,7 +17,7 @@ class Profile extends Component {
     state = {
         groups: [],
         profile: null,
-        editable:false,
+        editable: false,
         user:null
     }
 
