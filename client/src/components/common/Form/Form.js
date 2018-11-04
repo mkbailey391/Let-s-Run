@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 // import Header from '../common/Header/Header';
 // import httpClient from '../../utilities/httpClient';
+import Button from 'react-bootstrap/lib/Button';
+import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 
 class Form extends Component {
     constructor (props) {
@@ -129,7 +131,9 @@ class Form extends Component {
                                 onChange={handleChange}
                                 value={level}
                             />
-                            <input type="submit"/>
+                            <ButtonToolbar>
+                                <Button type="submit"/>
+                            </ButtonToolbar>
                             
                         </form>
                         
