@@ -111,11 +111,15 @@ render(){
                   <Form user={user} onSubmit={this.handleSubmit} />
                  </div>
             }
-
+            {
+                !editable && user &&
                 <ButtonToolbar>
                     <Button onClick={()=> this.toggleEdit(true)}variant="primary">Edit</Button>
                     <Button onClick={this.handleDelete} variant="primary" >Delete</Button>
                 </ButtonToolbar>
+
+            }        
+
             <h3>Your Groups</h3>
             {this.renderGroups()}
             
