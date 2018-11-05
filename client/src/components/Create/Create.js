@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Button from 'react-bootstrap/lib/Button';
+import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 
 class CreateGroup extends Component {
     state = { 
@@ -28,87 +30,71 @@ class CreateGroup extends Component {
         let { handleChange, handleSubmit } = this;
         return (
             <div>
-            <h1>Create a Group</h1>
-            <form onSubmit={handleSubmit}>
-                <div className="field">
-                    <label className="label"> Group Name</label>
-                    <div className="control">
-                        <input 
-                            className="input" 
-                            name="name" 
-                            type="text" 
-                            placeholder="We Love to Run!"
-                            onChange={handleChange} 
-                            value={name}/>
-                    </div>
-                    </div>
-                <div className="field">
-                    <label className="label">Group Description</label>
-                    <div className="control">
-                        <input 
-                            className="input" 
-                            name="description" 
-                            type="text" 
-                            placeholder="5k Training Group"
-                            onChange={handleChange} 
-                            value={description}/>
-                    </div>
-                    </div>
-                <div className="field">
-                    <label className="label">Location</label>
-                    <div className="control">
-                        <input 
-                            className="input" 
-                            name="location" 
-                            type="text" 
-                            placeholder="Santa Monica Peir"
-                            onChange={handleChange} 
-                            value={location}/>
-                    </div>
-                    </div>
-                <div className="field">
-                    <label className="label">Date</label>
-                    <div className="control">
-                        <input 
-                            className="input" 
-                            name="date" 
-                            type="text" 
-                            placeholder="10/31/2018"
-                            onChange={handleChange} 
-                            value={date}/>
-                    </div>
-                    </div>
-                <div className="field">
-                    <label className="label">Time</label>
-                    <div className="control">
-                        <input 
-                            className="input" 
-                            name="time" 
-                            type="text" 
-                            placeholder="10:00 am"
-                            onChange={handleChange} 
-                            value={time}/>
-                    </div>
-                    </div>
-                <div className="field">
-                    <label className="label">Photo</label>
-                    <div className="control">
-                        <input 
-                            className="input" 
-                            name="image" 
-                            type="text" 
-                            placeholder="Group Picture!" 
+                
+            <div className="row">
+                <div className="column column-50 column-offset-25">
+                    <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                    <label>Name: </label>
+                        <input className="form-control"
+                            type="text"
+                            name="name"
+                            placeholder="Name"
                             onChange={handleChange}
-                            value={image}/>
-                    </div>
-                    <div className="control">
-                        <button className="button is-primary">Submit</button>
-                    </div>
+                            value={name}
+                        />
+                        </div>
+                        <div className="form-group">
+                        <label>Group Description </label>
+                        <input className="form-control"
+                            type="text"
+                            name="description"
+                            placeholder="group description"
+                            onChange={handleChange}
+                            value={description}
+                        />
+                        </div>
+                        <div className="form-group">
+                        <label>Date </label>
+                        <input className="form-control"
+                            type="text"
+                            name="date"
+                            placeholder="Date of meeting"
+                            onChange={handleChange}
+                            value={date}
+                        />
+                        </div>
+                        <div className="form-group">
+                        <label>Time </label>
+                        <input className="form-control"
+                            type="text"
+                            name="time"
+                            placeholder="What time are you meeting?"
+                            onChange={handleChange}
+                            value={time}
+                        />
+                        </div>
+                        <div className="form-group">
+                        <label>Group Picture </label>
+                        <input className="form-control"
+                            type="text"
+                            name="image"
+                            placeholder="image"
+                            onChange={handleChange}
+                            value={image}
+                        />
+                        </div>
+                        
+                        <ButtonToolbar>
+                            <Button type="submit">Submit</Button>
+                        </ButtonToolbar>
+                        
+                    </form>
+                    
                 </div>
-            </form>
+            </div>
         </div>
-    );
+        );
+    } 
 }
-}
-
 export default CreateGroup;
